@@ -25,12 +25,12 @@ jobs:
       # gradle build
       - name: Test with Gradle
         run: |
-          cd ./back-memory
+          cd ./our-memory
           ./gradlew test
 
       - name: Build with Gradle
         run: |
-          cd ./back-memory
+          cd ./our-memory
           ./gradlew build -x test
 
       - name: Login to Docker Hub
@@ -45,8 +45,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: ./back-memory
-          file: ./back-memory/Dockerfile
+          context: ./our-memory
+          file: ./our-memory/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/memory-test:latest
           platforms: linux/arm64

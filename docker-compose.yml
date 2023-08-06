@@ -1,0 +1,22 @@
+version: "3"
+services:
+  backend:
+    image: ${DOCKER_USERNAME}/memory-test
+    expose:
+      - 8080
+    volumes:
+      - /home/ubuntu/logs/:/logs/
+    environment:
+      - SPRING_PROFILES_ACTIVE
+
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    restart: always
+    volumes:
+      - /home/ubuntu/certs/:/etc/nginx/certs/
+      - ./nginx-conf/:/etc/nginx/conf.d/
+    ports:
+      - 80:8080
+    depends_on:
+      - backend
